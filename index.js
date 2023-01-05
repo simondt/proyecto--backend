@@ -18,11 +18,10 @@ class ProductManager{
         }
         if (!this.#verifyProduct(product)) { 
             this.products.push(product)
-            const fs = require('fs')
-            fs.writeFileSync(this.path,JSON.stringify(this.products))
-          } else [
-              console.log("Ya existe un producto con ese codigo")
-          ]
+            this.#updateFile()
+          } else {
+              console.log("Error: producto inválido o código repetido")
+          }
     }
 
     deleteProduct(id){
@@ -32,13 +31,38 @@ class ProductManager{
         }else{
             const index = this.products.indexOf(del)
             this.products.splice(index, 1)
-            const fs = require('fs')
-            fs.writeFileSync(this.path,JSON.stringify(this.products))
+            this.#updateFile()
         }
     }
 
+    updateProduct(id, field){
+        const product = this.getProductById(id)
+        if(field === "all"){ // si se ingresa "all" se modifica todo el objeto
+            product.title = "newTitle"
+            product.description = "newDescription"
+            product.price = "newPrice"
+            product.thumbnail = "newThumbnail"
+            product.code = "newCode"
+            product.stock = "newStock"
+        }
+        else if(Object.hasOwn(product, field) && field != "id"){ // verifica si el campo que se intenta modificar existe en el objeto, y que este no sea id
+            product[field] = "new"+field.charAt(0).toUpperCase()+field.slice(1) // (hace mayuscula la primer letra de la var field)
+        }
+        else{
+            console.log("El campo ingresado no existe o no puede ser modificado")
+        }
+        this.#updateFile()
+    }
+
+    #updateFile(){ // actualiza el archivo de texto
+        const fs = require('fs')
+        fs.writeFileSync(this.path,JSON.stringify(this.products))
+    }
+
     #verifyProduct(product){ // verifica que no se repita el codigo y que todos los campos sean validos
-        return (this.products.some(p => p.code === product.code) || Object.values(product).includes(undefined))  
+        const repeatedProduct = this.products.some(p => p.code === product.code)
+        const incompleteProduct = Object.values(product).includes(undefined)
+        return (repeatedProduct || incompleteProduct)  
     }
 
     #generateID(){
