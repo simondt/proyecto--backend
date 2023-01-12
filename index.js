@@ -1,4 +1,7 @@
-class ProductManager{
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+
+export class ProductManager{
     constructor(){
         this.products = []
         this.path = "data.json"
