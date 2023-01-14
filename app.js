@@ -13,6 +13,7 @@ p.addProduct("mesa", "mesa", 7000, "asd.jpg", 150, 27)
 p.addProduct("silla", "silla", 8000, "asd.jpg", 151, 27)
 p.addProduct("horno", "horno", 1000, "asd.jpg", 152, 27)
 
+
 const app = express()
 const PORT = 8080
 

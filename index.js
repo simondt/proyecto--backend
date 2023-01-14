@@ -38,18 +38,10 @@ export class ProductManager{
         }
     }
 
-    updateProduct(id, field){
+    updateProduct(id, field, newValue){
         const product = this.getProductById(id)
-        if(field === "all"){ // si se ingresa "all" se modifica todo el objeto
-            product.title = "newTitle"
-            product.description = "newDescription"
-            product.price = "newPrice"
-            product.thumbnail = "newThumbnail"
-            product.code = "newCode"
-            product.stock = "newStock"
-        }
-        else if(Object.hasOwn(product, field) && field != "id"){ // verifica si el campo que se intenta modificar existe en el objeto, y que este no sea id
-            product[field] = "new"+field.charAt(0).toUpperCase()+field.slice(1) // (hace mayuscula la primer letra de la var field)
+        if(Object.hasOwn(product, field) && field != "id"){ // verifica si el campo que se intenta modificar existe en el objeto, y que este no sea id
+            product[field] = newValue
         }
         else{
             console.log("El campo ingresado no existe o no puede ser modificado")
