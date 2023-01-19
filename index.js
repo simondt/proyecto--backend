@@ -8,11 +8,15 @@ export class ProductManager{
     }
 
     getProducts(){
-        return this.products
+        const fs = require('fs')
+        const data = JSON.parse(fs.readFileSync(this.path))
+        return data
     }
 
     getProductById(id){
-        return(this.products.find(p => p.id === id))
+        const fs = require('fs')
+        const data = JSON.parse(fs.readFileSync(this.path))
+        return(data.find(p => p.id === id))
     }
 
     addProduct(title, description, price, thumbnail, code, stock){

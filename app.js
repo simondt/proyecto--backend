@@ -2,6 +2,8 @@ import express from 'express'
 import { ProductManager } from './index.js'
 
 const p = new ProductManager()
+
+/*
 p.addProduct("tv", "tv", 2000, "asd.jpg", 143, 23)
 p.addProduct("celu", "celu", 3000, "asd.jpg", 144, 43)
 p.addProduct("heladera", "heladera", 5000, "asd.jpg", 145, 27)
@@ -11,8 +13,7 @@ p.addProduct("lavarropas", "lavarropas", 3000, "asd.jpg", 148, 27)
 p.addProduct("microprocesadora", "microprocesadora", 2700, "asd.jpg", 149, 27)
 p.addProduct("mesa", "mesa", 7000, "asd.jpg", 150, 27)
 p.addProduct("silla", "silla", 8000, "asd.jpg", 151, 27)
-p.addProduct("horno", "horno", 1000, "asd.jpg", 152, 27)
-
+p.addProduct("horno", "horno", 1000, "asd.jpg", 152, 27)*/
 
 const app = express()
 const PORT = 8080
