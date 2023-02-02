@@ -18,7 +18,16 @@ socket.on('productListEmit', (products) => {
   let data = ''
   products.forEach((p) => {
     data += `<li><h3>Producto ${p.title} </h3>
-    <p>${p.description}, $${p.price}, codigo: ${p.code}, stock: ${p.stock}, estado: ${p.status}, categoria: ${p.category}</p></li>`
+    <p>${p.description}, $${p.price}, codigo: ${p.code}, stock: ${p.stock}, estado: ${p.status}, categoria: ${p.category}</p></li>
+    <button id="${p.id}">Borrar</button>
+    `
   })
   productList.innerHTML = data
+  products.forEach((p) => {
+    const deleteButton = document.getElementById(p.id)
+    deleteButton.onclick = (e) =>{
+      e.preventDefault()
+      socket.emit('productDeleteEmit', p.id)
+    }  
+  })
 }) 

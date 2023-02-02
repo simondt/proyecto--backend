@@ -49,7 +49,13 @@ socketServer.on('connection', (socket) => {
 
   socket.on('product',(product)=>{
     p.addProduct(product.title, product.description, parseFloat(product.price), product.thumbnails? product.thumbnails:[], parseInt(product.code), parseInt(product.stock), true, product.category)
+    socket.emit("productListEmit", p.products)
   }) // recibe un producto desde el formulario
+
+  socket.on('productDeleteEmit',(pid)=>{
+    p.deleteProduct(pid)
+    socket.emit("productListEmit", p.products)
+  })
 
 
 })
