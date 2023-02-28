@@ -19,15 +19,21 @@ socket.on('productListEmit', (products) => {
   products.forEach((p) => {
     data += `<li><h3>Producto ${p.title} </h3>
     <p>${p.description}, $${p.price}, codigo: ${p.code}, stock: ${p.stock}, estado: ${p.status}, categoria: ${p.category}</p></li>
-    <button id="${p.id}">Borrar</button>
+     <button id="${p._id}">Agregar al carrito</button> 
     `
   })
   productList.innerHTML = data
   products.forEach((p) => {
-    const deleteButton = document.getElementById(p.id)
+    const deleteButton = document.getElementById(p._id)
+    /*
     deleteButton.onclick = (e) =>{
       e.preventDefault()
-      socket.emit('productDeleteEmit', p.id)
+      socket.emit('productDeleteEmit', p._id)
+    }  */
+    const cartButton = document.getElementById(p._id)
+    cartButton.onclick = (e) =>{
+      e.preventDefault()
+      socket.emit('addToCartEmit', p._id)
     }  
   })
 }) 
