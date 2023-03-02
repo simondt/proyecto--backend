@@ -49,6 +49,11 @@ export default class CartsManager{
     async addProductToCart(id, productId){
         try {
             const cart = await cartsModel.findById(id)
+            /*
+            const product = cart.products.find(pid => pid === productId)
+            if(product){
+                product
+            }*/
             cart.products.push(productId)
             cart.save()
             return cart
