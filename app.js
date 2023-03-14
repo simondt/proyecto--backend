@@ -13,7 +13,8 @@ import CartsManager from './dao/dbManagers/cartsManager.js'
 import mongoStore from 'connect-mongo'
 import session from 'express-session'
 import cookieParser from 'cookie-parser'
-
+import passport from 'passport'
+import './passport/passportStrategies.js'
 
 
 import { dirname } from 'path'
@@ -47,8 +48,9 @@ app.use(
 )
 
 app.get('/', (req, res) => {
-  res.redirect('/views/login')
+  res.redirect('/views/register')
 })
+
 
 app.use('/home', homeRouter)
 app.use('/api/products', productsRouter)
@@ -56,6 +58,9 @@ app.use('/api/carts', cartsRouter)
 
 app.use('/views', viewsRouter)
 app.use('/api/sessions', sessionsRouter)
+
+app.use(passport.initialize())
+app.use(passport.session())
 
 
 app.get('/realtimeproducts', (req, res) => {
